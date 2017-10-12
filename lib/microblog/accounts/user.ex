@@ -8,6 +8,8 @@ defmodule Microblog.Accounts.User do
     field :email, :string
     field :username, :string
 
+    has_many :posts, Microblog.Mblog.Message
+
     timestamps()
   end
 
