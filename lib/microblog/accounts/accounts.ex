@@ -19,6 +19,7 @@ defmodule Microblog.Accounts do
   """
   def list_users do
     Repo.all(User)
+    |> Repo.preload(:likes)
   end
 
   @doc """
@@ -35,10 +36,14 @@ defmodule Microblog.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id) do
+    Repo.get!(User, id)
+    |> Repo.preload(:likes)
+  end
 
   def get_user_by_email(email) do
     Repo.get_by(User, email: email)
+    |> Repo.preload(:likes)
   end
 
   @doc """

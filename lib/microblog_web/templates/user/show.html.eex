@@ -30,7 +30,18 @@
                   <%= post.contant %>
                 </p>
                 <div class="d-flex w-100 justify-content-between">
-                  <p>Like</p>
+
+                  <div id="post-likes"
+                    data-path="<%= like_path(@conn, :index) %>"
+                    data-post_id="<%= post.id %>">
+                    &nbsp;
+                  </div>
+
+                  <script id="likes-template" type="text/x-handlebars-template">
+                    <p>{{like_count data}} likes
+                    </p>
+                  </script>
+
                   <%= link "read", to: message_path(@conn, :show, post), class: "text" %>
                 </div>
               </div>

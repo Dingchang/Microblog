@@ -1,13 +1,35 @@
-<h2>Show Message</h2>
 
-<ul>
+<div class="container">
+  <div class="jumbotron">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">
+        <%= @message.user.username %>
+      </h5>
+      <small>
+        <%= @message.inserted_at %>
+      </small>
+   </div>
+   <p class="text">
+    <%= @message.contant %></p>
 
-  <li>
-    <strong>Contant:</strong>
-    <%= @message.contant %>
-  </li>
+   <div class="text-center">
+       <div id="post-likes"
+         data-path="<%= like_path(@conn, :index) %>"
+         data-post_id="<%= @message.id %>">
+         &nbsp;
+       </div>
 
-</ul>
+       <script id="likes-template" type="text/x-handlebars-template">
+         <p>{{like_count data}} likes
+         </p>
+       </script>
 
-<span><%= link "Edit", to: message_path(@conn, :edit, @message) %></span>
+       <%= if @current_user do %>
+         <button id="like-button" class="btn btn-sm btn-outlin-dark"
+           data-user_id="<%= @current_user.id %>"
+           data-message_id="<%= @message.id %>">Like</button>
+       <% end %>
+   </div>
+</div>
+
 <span><%= link "Back", to: message_path(@conn, :index) %></span>

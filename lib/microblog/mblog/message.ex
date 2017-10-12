@@ -9,6 +9,8 @@ defmodule Microblog.Mblog.Message do
 
     belongs_to :user, Microblog.Accounts.User
 
+    has_many :likes, Microblog.Mblog.Like
+
     timestamps()
   end
 
