@@ -1,18 +1,47 @@
-<h2>Show User</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 my-2">
+      <div class="jumbotron" style="background-color: white;">
+        <img class="img-fluid" src="/images/profile.jpg">
 
-<ul>
+        <h3><%= @user.username %></h3>
 
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
+        <p><%= @user.email %>
+        </p>
+      </div>
+    </div>
 
-  <li>
-    <strong>Username:</strong>
-    <%= @user.username %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+    <div class="col-md-8 my-6">
+      <div class="jumbotron" style="background-color: white;">
+        <h3> Post </h3>
+        <div class="list-group">
+          <%= if length(@posts) > 0 do %>
+            <%= for post <- @posts do %>
+              <div class="list-group-item list-group-item-action flex-column align-item-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">
+                    <%= post.user.username %>
+                  </h4>
+                  <small>
+                    <%= post.inserted_at %>
+                  </small>
+                </div>
+                <p class="mb-1">
+                  <%= post.contant %>
+                </p>
+                <div class="d-flex w-100 justify-content-between">
+                  <p>Like</p>
+                  <%= link "read", to: message_path(@conn, :show, post), class: "text" %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text">
+              No posts found
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
