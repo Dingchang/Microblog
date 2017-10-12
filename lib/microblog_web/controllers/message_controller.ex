@@ -27,6 +27,7 @@ defmodule MicroblogWeb.MessageController do
 
   def show(conn, %{"id" => id}) do
     message = Mblog.get_message!(id)
+    |> Microblog.Repo.preload(:user)
     render(conn, "show.html", message: message)
   end
 
