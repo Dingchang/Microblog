@@ -22,12 +22,12 @@ import "phoenix_html"
 
 let handlebars = require("handlebars");
 
-handlebars.registerHelper('like_count', function(json)) {
+handlebars.registerHelper('like_count', function(json) {
   return Object.keys(json).length;
-}
+});
 
 $(function() {
-  if (!$"#likes-template").length > 0 {
+  if (!$("#likes-template").length > 0) {
     // Wrong page
     return;
   }
@@ -70,7 +70,7 @@ $(function() {
       contentType: "application/json",
       dataType: "json",
       method: "GET",
-      success: fetch_likes();
+      success: fetch_likes(),
     });
 
     $("#like-button").val("");

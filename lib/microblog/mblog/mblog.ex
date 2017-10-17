@@ -146,7 +146,11 @@ defmodule Microblog.Mblog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_like!(id), do: Repo.get!(Like, id)
+  def get_like!(id) do
+    Repo.get!(Like, id)
+    |> Repo.preload(:user)
+    |> Repo.preload(:likes)
+  end
 
   @doc """
   Creates a like.

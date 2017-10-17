@@ -52,7 +52,7 @@ config :phoenix, :stacktrace_depth, 20
 config :microblog, Microblog.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "microblog",
-  password: "microblog123",
+  password: "woshimb123",
   database: "microblog_dev",
   hostname: "localhost",
   pool_size: 10
