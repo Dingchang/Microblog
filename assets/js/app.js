@@ -38,11 +38,11 @@ $(function() {
 
   let dd = $($("#post-likes")[0]);
   let path = dd.data('path');
-  let post_id = dd.data('message_id');
+  let message_id = dd.data('message_id');
 
   let lb = $($("#like-button")[0]);
   let like_user_id = lb.data('user_id');
-  let like_post_id = lb.data('message_id');
+  let like_message_id = lb.data('message_id');
 
   function fetch_likes() {
     function got_likes(data) {
@@ -53,7 +53,7 @@ $(function() {
 
     $.ajax({
       url: path,
-      data: {post_id: post_id},
+      data: {message_id: message_id},
       contentType: "application/json",
       dataType: "json",
       method: "GET",
@@ -62,19 +62,18 @@ $(function() {
   }
 
   function add_like() {
-    let data = {like: {post_id: like_post_id, user_id: like_user_id}}
+    let data = {like: {user_id: like_user_id, message_id: like_message_id}}
 
     $.ajax({
       url: path,
       data: JSON.stringify(data),
       contentType: "application/json",
       dataType: "json",
-      method: "GET",
+      method: "POST",
       success: fetch_likes,
     });
 
-    $("#like-button").val("");
-    $("#like-button")[0].disabled=true;
+    window.location.reload();
   }
 
   lb.click(add_like);

@@ -6,6 +6,11 @@ defmodule MicroblogWeb.LikeController do
 
   action_fallback MicroblogWeb.FallbackController
 
+  def index(conn, %{"message_id" => message_id}) do
+    likes = Mblog.list_message_likes(message_id)
+    render(conn, "index.json", likes: likes)
+  end
+
   def index(conn, _params) do
     likes = Mblog.list_likes()
     render(conn, "index.json", likes: likes)

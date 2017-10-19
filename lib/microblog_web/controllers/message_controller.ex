@@ -34,7 +34,6 @@ defmodule MicroblogWeb.MessageController do
     if cur_user do
       has_like = Mblog.has_like(cur_user.id, id)
     end
-
     message = Mblog.get_message!(id)
     |> Microblog.Repo.preload(:user)
     render(conn, "show.html", message: message, has_like: has_like)

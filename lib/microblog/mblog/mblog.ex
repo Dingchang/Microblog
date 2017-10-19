@@ -123,13 +123,16 @@ defmodule Microblog.Mblog do
   def list_likes do
     Repo.all(Like)
     |> Repo.preload(:user)
-    |> Repo.preload(:likes)
   end
 
-  def list_post_likes(post_id) do
-    Repo.all(from like in Like, where: like.user_id == ^post_id)
+  def list_message_likes(message_id) do
+    Repo.all(from like in Like, where: like.message_id == ^message_id)
     |> Repo.preload(:user)
-    |> Repo.preload(:likes)
+  end
+
+  def list_user_likes(user_id) do
+    Repo.all(from like in Like, where: like.user_id == ^user_id)
+    |> Repo.preload(:user)
   end
 
   @doc """
@@ -149,7 +152,10 @@ defmodule Microblog.Mblog do
   def get_like!(id) do
     Repo.get!(Like, id)
     |> Repo.preload(:user)
-    |> Repo.preload(:likes)
+  end
+
+  def get_like_by_id(user, message) do
+    Repo.get_by(Like, user_id: user.id, message_id: message.id)
   end
 
   def has_like(user_id, message_id) do
@@ -219,5 +225,9 @@ defmodule Microblog.Mblog do
   """
   def change_like(%Like{} = like) do
     Like.changeset(like, %{})
+  end
+
+  def has_like?(user_id, message_id) do
+    !!Repo.get_by(Like, user_id: user_id, message_id: message_id)
   end
 end

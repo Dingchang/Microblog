@@ -36,11 +36,6 @@
                     data-post_id="<%= post.id %>">
                   </div>
 
-                  <script id="likes-template" type="text/x-handlebars-template">
-                    <p>{{like_count data}} likes
-                    </p>
-                  </script>
-
                   <%= link "read", to: message_path(@conn, :show, post), class: "text" %>
                 </div>
               </div>

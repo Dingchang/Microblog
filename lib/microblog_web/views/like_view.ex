@@ -17,8 +17,8 @@ defmodule MicroblogWeb.LikeView do
       message_id: like.message_id,
     }
 
-    if Ecto.assoc_loaded?(like.post) do
-      Map.put(data, :post_contant, like.post.contant)
+    if Ecto.assoc_loaded?(like.user) do
+      Map.put(data, :user_email, like.user.email)
     else
       data
     end
