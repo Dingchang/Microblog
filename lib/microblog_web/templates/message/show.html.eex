@@ -16,7 +16,6 @@
        <div id="post-likes"
          data-path="<%= like_path(@conn, :index) %>"
          data-post_id="<%= @message.id %>">
-         &nbsp;
        </div>
 
        <script id="likes-template" type="text/x-handlebars-template">
@@ -24,11 +23,18 @@
          </p>
        </script>
 
-       <%= if @current_user do %>
+       <%= if @current_user && length(@has_like) == 0 do %>
          <button id="like-button" class="btn btn-sm btn-outlin-dark"
            data-user_id="<%= @current_user.id %>"
            data-message_id="<%= @message.id %>">Like</button>
        <% end %>
+
+       <%= if @current_user && length(@has_like) != 0 do %>
+         <button id="like-button" class="btn btn-sm btn-outlin-dark"
+           data-user_id="<%= @current_user.id %>"
+           data-message_id="<%= @message.id %>">Liked</button>
+       <% end %>
+
    </div>
 </div>
 

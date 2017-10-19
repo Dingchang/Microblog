@@ -18,7 +18,7 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
 
 let handlebars = require("handlebars");
 
@@ -70,10 +70,11 @@ $(function() {
       contentType: "application/json",
       dataType: "json",
       method: "GET",
-      success: fetch_likes(),
+      success: fetch_likes,
     });
 
     $("#like-button").val("");
+    $("#like-button")[0].disabled=true;
   }
 
   lb.click(add_like);

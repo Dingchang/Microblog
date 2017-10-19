@@ -15,8 +15,11 @@ defmodule MicroblogWeb.MessageController do
   end
 
   def create(conn, %{"message" => message_params}) do
+
     case Mblog.create_message(message_params) do
       {:ok, message} ->
+        message_params = Map.put(message_params, "user_id", conn.assigns[:current_user].id)
+        MicroblogWeb.Endpoint.broadcast("updates:all", "new_message", message_params)
         conn
         |> put_flash(:info, "Message created successfully.")
         |> redirect(to: message_path(conn, :show, message))
@@ -26,9 +29,15 @@ defmodule MicroblogWeb.MessageController do
   end
 
   def show(conn, %{"id" => id}) do
+    has_like = nil
+    cur_user = conn.assigns[:current_user]
+    if cur_user do
+      has_like = Mblog.has_like(cur_user.id, id)
+    end
+
     message = Mblog.get_message!(id)
     |> Microblog.Repo.preload(:user)
-    render(conn, "show.html", message: message)
+    render(conn, "show.html", message: message, has_like: has_like)
   end
 
   def edit(conn, %{"id" => id}) do

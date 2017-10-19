@@ -152,6 +152,10 @@ defmodule Microblog.Mblog do
     |> Repo.preload(:likes)
   end
 
+  def has_like(user_id, message_id) do
+    Repo.all(from r in Like, where: r.user_id == ^user_id and r.message_id == ^message_id)
+  end
+
   @doc """
   Creates a like.
 
