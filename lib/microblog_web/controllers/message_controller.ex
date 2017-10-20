@@ -15,11 +15,11 @@ defmodule MicroblogWeb.MessageController do
   end
 
   def create(conn, %{"message" => message_params}) do
-
     case Mblog.create_message(message_params) do
       {:ok, message} ->
-        message_params = Map.put(message_params, "user_id", conn.assigns[:current_user].id)
-        MicroblogWeb.Endpoint.broadcast("updates:all", "new_message", message_params)
+        MicroblogWeb.Endpoint.broadcast("updates:all", "new_message",
+        %{"message_contant" => message.contant,
+          "message_show_path" => message_path(conn, :show, message)})
         conn
         |> put_flash(:info, "Message created successfully.")
         |> redirect(to: message_path(conn, :show, message))

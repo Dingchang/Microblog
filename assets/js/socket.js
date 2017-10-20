@@ -51,23 +51,42 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+  socket.connect()
 
-$(function() {
-  if (!$("#post-template").length > 0) {
-    // Wrong page
-    return;
+  let channel = socket.channel("updates:all", {})
+
+  const newMessage = function(payload) {
+    let msg = document.createElement("tr");
+
+    // message contant
+    let msg_contant = document.createElement("td");
+    msg_contant.innerText = payload.message_contant;
+
+    // message show path
+    let msg_show = document.createElement("td");
+    msg_show.className = "text-right";
+    let msg_show_span = document.createElement("span");
+    let msg_show_link = document.createElement("a");
+    msg_show_link.href = payload.message_show_path;
+    msg_show_link.className = "btn btn-default btn-xs";
+    msg_show_link.innerText = "Show";
+    msg_show_span.appendChild(msg_show_link);
+    msg_show.appendChild(msg_show_span);
+
+    msg.appendChild(msg_contant);
+    msg.appendChild(msg_show);
+
+    return msg;
   }
 
-  let channel = socket.channel("updates:all")
+  channel.on("new_message", payload => {
+    let message = newMessage(payload);
+    $('#message-index').prepend(message);
+  });
+
   channel.join()
     .receive("ok", resp => { console.log("Joined successfully", resp) })
     .receive("error", resp => { console.log("Unable to join", resp) });
 
-  channel.on("new_message", new_message);
-})
-
 // Now that you are connected, you can join channels with a topic:
-
-
 export default socket
