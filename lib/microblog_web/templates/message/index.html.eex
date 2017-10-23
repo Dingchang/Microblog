@@ -1,15 +1,13 @@
-<h2>Listing Messages</h2>
+
 
 <table class="table">
   <thead>
     <tr>
-      <th>Feeds</th>
-
-      <th></th>
+      <th><h2>Feed</h2></th>
     </tr>
   </thead>
   <tbody id="message-index">
-    <%= for message <- @messages do %>
+    <%= for message <- Enum.reverse(@messages) do %>
         <tr>
           <td><%= message.contant %></td>
 
@@ -20,5 +18,3 @@
     <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Message", to: message_path(@conn, :new) %></span>

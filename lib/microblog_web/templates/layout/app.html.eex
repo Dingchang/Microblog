@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Microblog!</title>
+  <title>Hello Microblog!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
@@ -21,8 +21,11 @@
 
       <div class="collapse navbar-collapse" id="main-navbar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <%= link "People", to: user_path(@conn, :index), class: "nav-link" %>
+          </li class="nav-item">
+            <%= link "Messages", to: message_path(@conn, :index), class: "nav-link" %>
+          <li>
           </li>
         </ul>
       </div>
