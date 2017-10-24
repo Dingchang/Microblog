@@ -18,7 +18,7 @@
               <%= form_for @conn, follow_path(@conn, :delete), [method: :delete, as: "follow"], fn f -> %>
                 <%= hidden_input f, :follow_id, value: @user.id %>
                 <%= hidden_input f, :user_id, value: @current_user.id %>
-                <%= submit "unfollow", class: "btn btn-info" %>
+                <%= submit "unfollow", class: "btn btn-danger" %>
               <% end %>
             <% else %>
               <%= form_for @conn, follow_path(@conn, :create), [as: "follow"], fn f -> %>

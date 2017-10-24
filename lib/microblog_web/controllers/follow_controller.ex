@@ -8,7 +8,7 @@ defmodule MicroblogWeb.FollowController do
     case Accounts.create_follow(follow_params) do
       {:ok, follow} ->
         conn
-        |> put_flash(:info, "User followed successfully.")
+        |> put_flash(:info, "Successfully followed")
         |> redirect(to: NavigationHistory.last_path(conn, default: user_path(conn, :index)))
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
@@ -22,7 +22,7 @@ defmodule MicroblogWeb.FollowController do
     {:ok, _follow} = Accounts.delete_follow(follow)
 
     conn
-    |> put_flash(:info, "User unfollowed successfully.")
+    |> put_flash(:info, "Successfully unfollowed")
     |> redirect(to: user_path(conn, :show, follow_params["follow_id"]))
   end
 end

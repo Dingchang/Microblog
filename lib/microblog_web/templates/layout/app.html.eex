@@ -37,7 +37,8 @@
 
       <%= if @current_user do %>
         <%= link "Post", to: message_path(@conn, :new), class: "btn btn-primary" %>
-        <span class="text-light">
+        &nbsp;&nbsp;
+        <span class="text-light ">
           <%= @current_user.email %> |
           <%= link("logout", to: session_path(@conn, :logout), method: :delete) %>
         </span>
