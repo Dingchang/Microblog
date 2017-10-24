@@ -8,6 +8,27 @@
 
         <p><%= @user.email %>
         </p>
+
+        <%= if @current_user do %>
+          <%= if @current_user.id == @user.id do %>
+          <span><%= link "Edit Profile", to: user_path(@conn, :edit, @user), class: "btn btn-primary" %>
+          </span>
+          <% else %>
+            <%= if Microblog.Accounts.is_follow?(@current_user.id, @user.id) do %>
+              <%= form_for @conn, follow_path(@conn, :delete), [method: :delete, as: "follow"], fn f -> %>
+                <%= hidden_input f, :follow_id, value: @user.id %>
+                <%= hidden_input f, :user_id, value: @current_user.id %>
+                <%= submit "unfollow", class: "btn btn-info" %>
+              <% end %>
+            <% else %>
+              <%= form_for @conn, follow_path(@conn, :create), [as: "follow"], fn f -> %>
+              <%= hidden_input f, :follow_id, value: @user.id %>
+              <%= hidden_input f, :user_id, value: @current_user.id %>
+              <%= submit "follow", class: "btn btn-primary" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
     </div>
 

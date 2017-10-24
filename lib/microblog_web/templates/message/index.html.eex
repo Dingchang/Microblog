@@ -1,20 +1,40 @@
-
-
+<h2>Timeline</h2>
 <table class="table">
   <thead>
     <tr>
-      <th><h2>Feed</h2></th>
+      <th>User</th>
+      <th>Content</th>
     </tr>
   </thead>
-  <tbody id="message-index">
-    <%= for message <- Enum.reverse(@messages) do %>
-        <tr>
-          <td><%= message.contant %></td>
 
-          <td class="text-right">
-            <span><%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %></span>
-          </td>
-        </tr>
-    <% end %>
-  </tbody>
+  <%= if @current_user do %>
+    <tbody id="message-index">
+      <%= for message <- Microblog.Accounts.get_user_feed(@current_user) do %>
+          <tr>
+            <td><%= message.user.username %></td>
+
+            <td><%= message.contant %></td>
+
+            <td class="text-right">
+              <span><%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %></span>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <tbody id="message-index">
+      <%= for message <- Enum.reverse(@messages) do %>
+          <tr>
+            <td><%= message.user.username %></td>
+
+            <td><%= message.contant %></td>
+
+            <td class="text-right">
+              <span><%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %></span>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+
 </table>

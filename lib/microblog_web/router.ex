@@ -8,8 +8,8 @@ defmodule MicroblogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    #plug NavigationHistory.Tracker
     plug :fetch_user
+    plug NavigationHistory.Tracker
   end
 
   pipeline :api do
@@ -24,6 +24,8 @@ defmodule MicroblogWeb.Router do
     get "/", PageController, :index
     resources "/messages", MessageController
     resources "/users", UserController
+    delete "/follows", FollowController, :delete
+    resources "/follows", FollowController, except: [:show, :new, :index, :update, :edit, :delete]
 
     post "/sessions", SessionController, :login
     delete "/sessions", SessionController, :logout

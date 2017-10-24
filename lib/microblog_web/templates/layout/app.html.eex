@@ -21,12 +21,17 @@
 
       <div class="collapse navbar-collapse" id="main-navbar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item active">
             <%= link "People", to: user_path(@conn, :index), class: "nav-link" %>
-          </li class="nav-item">
-            <%= link "Messages", to: message_path(@conn, :index), class: "nav-link" %>
-          <li>
           </li>
+          <li  class="nav-item active">
+            <%= link "Messages", to: message_path(@conn, :index), class: "nav-link" %>
+          </li>
+          <%= if @current_user do %>
+            <li  class="nav-item active">
+              <%= link "Profile", to: user_path(@conn, :show, @current_user.id), class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
       </div>
 
