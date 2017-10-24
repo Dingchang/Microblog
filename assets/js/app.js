@@ -73,6 +73,7 @@ $(function() {
       success: fetch_likes,
     });
 
+    $("#like-button").val("");
     window.location.reload();
   }
 

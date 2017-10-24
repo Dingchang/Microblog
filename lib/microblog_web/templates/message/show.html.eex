@@ -30,6 +30,7 @@
           <span class="badge badge-info">
              Liked
           </span>
+          <br>
         <% else %>
           <button id="like-button" class="btn btn-sm btn-primary"
             data-user_id="<%= @current_user.id %>"
@@ -38,7 +39,7 @@
         <%= if @current_user.id == @message.user.id ||
           MicroblogWeb.Helpers.is_admin?(@current_user) do %>
             <%= link "Delete", to: message_path(@conn, :delete, @message),
-              method: :delete, class: "btn btn-sm btn-danger" %>
+              method: :delete, class: "btn btn-sm btn-danger my-2" %>
         <% end %>
        <% end %>
    </div>
