@@ -35,6 +35,11 @@
             data-user_id="<%= @current_user.id %>"
             data-message_id="<%= @message.id %>">Like</button>
         <% end %>
+        <%= if @current_user.id == @message.user.id ||
+          MicroblogWeb.Helpers.is_admin?(@current_user) do %>
+            <%= link "Delete", to: message_path(@conn, :delete, @message),
+              method: :delete, class: "btn btn-sm btn-danger" %>
+        <% end %>
        <% end %>
    </div>
 </div>

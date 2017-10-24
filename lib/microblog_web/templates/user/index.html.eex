@@ -18,6 +18,10 @@
               <p class="card-text">
                 <%= user.email%>
               </p>
+              <%= if MicroblogWeb.Helpers.is_admin?(@current_user) do %>
+              <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete,
+                  data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" %></span>
+              <% end %>
             </div>
           </div>
         <% end %>
