@@ -44,5 +44,3 @@
        <% end %>
    </div>
 </div>
-
-<span><%= link "Back", to: message_path(@conn, :index) %></span>

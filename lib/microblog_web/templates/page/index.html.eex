@@ -1,9 +1,10 @@
-<%= if @current_user do %>
-  <div class="jumbotron text-center">
-    <h2>Welcome back!</h2>
-    <p class="lead">Weibo is the secret base of your thoughts</p>
-  </div>
-<% else %>
+
+<div class="jumbotron text-center">
+  <h2>Welcome to Weibo!</h2>
+  <p class="lead">Weibo is the secret base of your thoughts</p>
+</div>
+
+<%= if @current_user == nil do %>
   <div class="container">
     <div class="row">
       <div class="col-md-3">

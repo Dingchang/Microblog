@@ -13,7 +13,7 @@
 
   <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-md">
-      <a class="navbar-brand" href="#">Weibo</a>
+      <%= link "Weibo", to: user_path(@conn, :index), class: "navbar-brand" %>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar">
         <span class="navbar-toggler-icon"></span>
