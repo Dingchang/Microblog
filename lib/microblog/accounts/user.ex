@@ -27,7 +27,7 @@ defmodule Microblog.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :username, :password, :password_confirmation])
+    |> cast(attrs, [:email, :username, :password, :password_confirmation, :is_admin])
     |> validate_confirmation(:password)
     |> validate_password(:password)
     |> put_pass_hash()
