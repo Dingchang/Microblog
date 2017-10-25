@@ -58,9 +58,12 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
   const newMessage = function(payload) {
     let msg = document.createElement("tr");
 
-    // message contant
-    let msg_contant = document.createElement("td");
-    msg_contant.innerText = payload.message_contant;
+    let msg_user = document.createElement("td");
+    msg_user.innerText = payload.username;
+
+    // message content
+    let msg_content = document.createElement("td");
+    msg_content.innerText = payload.message_contant;
 
     // message show path
     let msg_show = document.createElement("td");
@@ -69,11 +72,12 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
     let msg_show_link = document.createElement("a");
     msg_show_link.href = payload.message_show_path;
     msg_show_link.className = "btn btn-default btn-xs";
-    msg_show_link.innerText = "Show";
+    msg_show_link.innerText = "read";
     msg_show_span.appendChild(msg_show_link);
     msg_show.appendChild(msg_show_span);
 
-    msg.appendChild(msg_contant);
+    msg.appendChild(msg_user);
+    msg.appendChild(msg_content);
     msg.appendChild(msg_show);
 
     return msg;
