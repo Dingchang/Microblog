@@ -25,7 +25,7 @@
             <%= link "People", to: user_path(@conn, :index), class: "nav-link" %>
           </li>
           <li  class="nav-item active">
-            <%= link "Messages", to: message_path(@conn, :index), class: "nav-link" %>
+            <%= link "Posts", to: message_path(@conn, :index), class: "nav-link" %>
           </li>
           <%= if @current_user do %>
             <li  class="nav-item active">

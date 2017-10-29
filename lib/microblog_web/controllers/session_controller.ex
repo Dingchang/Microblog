@@ -34,11 +34,17 @@ defmodule MicroblogWeb.SessionController do
 
   def get_and_auth_user(email, password) do
     user = Accounts.get_user_by_email(email)
+
+    if user do
     user = throttle_attempts(user)
-    case Comeonin.Argon2.check_pass(user, password) do
-      {:ok, user} -> user
-      _else       -> nil
+      case Comeonin.Argon2.check_pass(user, password) do
+        {:ok, user} -> user
+        _else       -> nil
+      end  
+    else
+      nil
     end
+
   end
 
   def login(conn, %{"email" => email, "password" => password}) do
